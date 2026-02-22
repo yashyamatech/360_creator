@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../../../shared/utils/responsive_helper.dart';
 import '../../../shared/widgets/loading_widget.dart';
+import '../../../shared/widgets/shimmer_loading.dart';
 import '../../../shared/theme/app_colors.dart';
 import '../store/home_store.dart';
 import '../widgets/video_post_card.dart';
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Observer(
         builder: (_) {
           if (_homeStore.isLoading && _homeStore.videoPosts.isEmpty) {
-            return const Center(child: LoadingWidget());
+            return _buildShimmerList(isMobile);
           }
 
           if (_homeStore.error != null && _homeStore.videoPosts.isEmpty) {
@@ -178,6 +179,20 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () => context.push('/inquiry'),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildShimmerList(bool isMobile) {
+    return ListView.builder(
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 8.0 : 32.0,
+        vertical: 8.0,
+      ),
+      itemCount: 4,
+      itemBuilder: (_, __) => const Padding(
+        padding: EdgeInsets.only(bottom: 16.0),
+        child: VideoPostCardShimmer(),
       ),
     );
   }

@@ -1,7 +1,9 @@
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
+import 'app_logger.dart';
 
 class EmailService {
+  final _log = AppLogger();
   // Configure with your Gmail credentials
   // For production, use environment variables or secure storage
   static const String _senderEmail = 'your-email@gmail.com';
@@ -35,7 +37,9 @@ class EmailService {
         );
 
       await send(emailMessage, smtpServer);
-    } catch (e) {
+      _log.i('Inquiry email sent to $clientEmail');
+    } catch (e, st) {
+      _log.e('Failed to send inquiry email', e, st);
       throw Exception('Failed to send inquiry email: $e');
     }
   }
@@ -64,7 +68,9 @@ class EmailService {
         );
 
       await send(emailMessage, smtpServer);
-    } catch (e) {
+      _log.i('Booking confirmation email sent to $clientEmail');
+    } catch (e, st) {
+      _log.e('Failed to send booking confirmation email', e, st);
       throw Exception('Failed to send booking confirmation email: $e');
     }
   }
