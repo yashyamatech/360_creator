@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../features/home/pages/home_screen.dart';
-import '../features/video_detail/pages/video_detail_screen.dart';
+import '../features/video_detail/presentation/pages/video_detail_screen.dart';
 import '../features/inquiry/pages/inquiry_form_screen.dart';
 import '../features/booking/pages/booking_screen.dart';
-import '../features/about/pages/about_screen.dart';
+import '../features/about/presentation/pages/about_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
